@@ -3,8 +3,15 @@ import { Film } from "lucide-react"
 import { useFavorites } from "../context/FavoritesContext"
 import type { Movie } from "../types"
 
-export function WatchlistView({ movies }: { movies: any[] }) {
+export function WatchlistView() { // убрали пропс movies
   const { favorites } = useFavorites()
+
+  // Функция для получения рейтинга
+  const getRating = (movie: Movie) => {
+    if (movie.rating) return movie.rating.toFixed(1)
+    if (movie.vote_average) return movie.vote_average.toFixed(1)
+    return "N/A"
+  }
 
   return (
     <>
@@ -24,7 +31,7 @@ export function WatchlistView({ movies }: { movies: any[] }) {
         </div>
       ) : (
         <div className="grid grid-cols-2 gap-4">
-          {favorites.slice(0, 8).map((movie: Movie, index: number) => (
+          {favorites.slice(0, 8).map((movie: Movie) => ( // убрали index
             <motion.div
               key={movie.title}
               initial={{ opacity: 0, scale: 0.9 }}
@@ -35,6 +42,20 @@ export function WatchlistView({ movies }: { movies: any[] }) {
                 src={movie.poster} 
                 alt={movie.title}
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+              />
+              <div className="absolute bottom-4 left-4 right-4">
+                <h4 className="font-bold text-white text-lg drop-shadow-lg line-clamp-2">{movie.title}</h4>
+                <p className="text-emerald-400 text-sm font-medium mt-1 drop-shadow-lg">
+                  {movie.year} • {getRating(movie)}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      )}
+    </>
+  )
+}                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               />
               <div className="absolute bottom-4 left-4 right-4">
                 <h4 className="font-bold text-white text-lg drop-shadow-lg line-clamp-2">{movie.title}</h4>
