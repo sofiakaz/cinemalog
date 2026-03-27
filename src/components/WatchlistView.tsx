@@ -6,7 +6,6 @@ import type { Movie } from "../types"
 export function WatchlistView() {
   const { favorites } = useFavorites()
 
-  // Функция для получения рейтинга
   const getRating = (movie: Movie) => {
     if (movie.rating) return movie.rating.toFixed(1)
     if (movie.vote_average) return movie.vote_average.toFixed(1)
