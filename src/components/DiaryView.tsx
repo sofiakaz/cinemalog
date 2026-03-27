@@ -3,7 +3,7 @@ import { Calendar, Star, MapPin, Clock } from "lucide-react"
 import { useViewed } from "../context/ViewedContext"
 import type { Movie } from "../types"
 
-export function DiaryView({ movies }: { movies: any[] }) {
+export function DiaryView() { // убрали пропс movies
   const { viewedList } = useViewed()
 
   return (
@@ -47,7 +47,7 @@ export function DiaryView({ movies }: { movies: any[] }) {
                   <div className="flex items-center gap-4 text-sm">
                     <div className="flex items-center gap-1 bg-amber-500/20 px-3 py-1 rounded-xl">
                       <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
-                      <span className="font-bold">{movie.rating.toFixed(1)}</span>
+                      <span className="font-bold">{movie.rating?.toFixed(1) || movie.vote_average?.toFixed(1) || "N/A"}</span>
                     </div>
                     <span className="text-slate-400">{movie.year}</span>
                   </div>
