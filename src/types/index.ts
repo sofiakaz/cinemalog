@@ -3,7 +3,7 @@ export interface Movie {
   year: number
   country: string
   poster: string
-  rating: number
+  vote_average?: number
   description: string
   director: string
   duration: number
